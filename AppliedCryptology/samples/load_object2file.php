@@ -4,7 +4,7 @@
  * @author huangwei
  */
 $file      = "user.db";
-$user_json = file_get_contents($file);
+$user_json = @file_get_contents($file);
 if($user_json === FALSE) {
     echo "[ERR] $file load failed!\n";
     exit(1);
