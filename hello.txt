@@ -1,6 +1,0 @@
-Git a version control system.
-Git is free software.
-
-这是怎么回事？
-
-haha
