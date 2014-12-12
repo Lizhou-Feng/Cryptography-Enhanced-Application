@@ -1,0 +1,29 @@
+= 交叉编译tcpdump for Android on Ubuntu 14.04 =
+
+ref: http://www.symantec.com/connect/blogs/monitoring-android-network-traffic-part-ii-cross-compiling-tcpdump
+
+使用的源代码版本：
+
+* libpcap-1.6.2.tar.gz
+* tcpdump-4.6.2.tar
+
+编译步骤
+
+* tar zxf libpcap-1.6.2.tar.gz
+* cd libpcap-1.6.2
+* sudo apt-get install build-essential flex bison gcc-arm-linux-gnueabi
+* export CC=arm-linux-gnueabi-gcc
+* ./configure --host=arm-linux --with-pcap=linux
+* cd ..
+* tar zxf tcpdump-4.6.2.tar.gz
+* cd tcpdump-4.6.2/
+* uname -a
+  * 查看当前Linux内核的大版本号
+* export ac_cv_linux_vers=3
+* export CFLAGS=-static
+* export CPPFLAGS=-static
+* export LDFLAGS=-static
+* ./configure --host=arm-linux --disable-ipv6
+* make
+
+
