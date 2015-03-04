@@ -3,7 +3,11 @@
 TIMEOUT=3
 COUNT=5
 STATS_PATTERN="packet loss"
+if [[ $(uname) = "Linux" ]];then
+  OK_PATTERN=" 0% packet loss"
+else
 OK_PATTERN=" 0.0% packet loss"
+fi
 
 watch_ips=(
 "www.baidu.com"
@@ -36,10 +40,13 @@ ip="$1"
 task_pid=$2
 tmpdir="$3"
 tmpfile="$tmpdir/$task_pid"
-ping -t $TIMEOUT -c $COUNT "$ip" 1>>"${tmpfile}.tmp" 2>/dev/null
+if [[ $(uname) = "Linux" ]];then
+  ping -W $TIMEOUT -c $COUNT "$ip" 1>>"${tmpfile}.tmp" 2>/dev/null
+else
+  ping -t $TIMEOUT -c $COUNT "$ip" 1>>"${tmpfile}.tmp" 2>/dev/null
+fi
 ret_code=$?
-mv "${tmpfile}.tmp" "${tmpfile}.done"
-ret_msg=$(grep "$STATS_PATTERN" "${tmpfile}.done")
+ret_msg=$(grep "$STATS_PATTERN" "${tmpfile}.tmp")
 if [[ $ret_code -eq 0 ]];then
   if [[ $(echo -n $ret_msg | grep -c "$OK_PATTERN") -eq 1 ]];then
     ok "$ip is alive with $ret_msg"
@@ -49,9 +56,11 @@ if [[ $ret_code -eq 0 ]];then
 else
   error "$ip is dead with ret_code $ret_code and $ret_msg"
 fi
+mv "${tmpfile}.tmp" "${tmpfile}.done"
 }
 
 function init() {
+[[ -d ${TMPDIR} ]] || TMPDIR="/tmp/"
 DIR="${TMPDIR}$RANDOM"
 mkdir "$DIR"
 ret=$?
