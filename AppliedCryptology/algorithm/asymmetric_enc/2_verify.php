@@ -22,7 +22,7 @@ $pub_key  = openssl_pkey_get_public("file://$cwd/server.crt");
 $signature = file_get_contents($sig);
 
 //verify signature
-$ok = openssl_verify($data, $signature, $pub_key, OPENSSL_ALGO_SHA1);
+$ok = openssl_verify($data, $signature, $pub_key, OPENSSL_ALGO_SHA256);
 if ($ok == 1) {
     echo "valid", PHP_EOL;
 } elseif ($ok == 0) {

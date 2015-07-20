@@ -34,7 +34,23 @@ URGw5qT2YXfC3sGFwVNXEMJMS4cWKFCEaT+EIHQrKN9kJ0/lWYZdfA==
 -----END RSA PRIVATE KEY-----
 PRIV_KEY;
 
+// 方法1： 硬编码私钥
 $result = openssl_private_decrypt(hex2bin($cipher_text_hex), $message, $priv_key);
+
+echo "硬编码私钥方式解密demo" . PHP_EOL;
 var_dump($result);
 var_dump($message);
+
+// 方法2：读取私钥文件
+unset($message);
+$priv_key = openssl_pkey_get_private("file:///". dirname(__FILE__) . "/server.key");
+
+$result = openssl_private_decrypt(file_get_contents("3_encrypt.enc"), $message, $priv_key); 
+
+echo "读取私钥文件方式解密demo" . PHP_EOL;
+var_dump($result);
+var_dump($message);
+
+
+
 

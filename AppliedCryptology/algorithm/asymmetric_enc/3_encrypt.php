@@ -35,6 +35,24 @@ FEvq+GPV
 -----END CERTIFICATE-----
 PUB_KEY;
 
+// 方法1：硬编码公钥
 $result = openssl_public_encrypt($message, $cipher_text, $pub_key); 
+
+echo "硬编码公钥方式加密demo" . PHP_EOL;
 var_dump($result);
 var_dump(bin2hex($cipher_text));
+
+
+// 方法2：读取公钥文件
+unset($cipher_text); // 重置方法1的输出结果
+$pub_key = openssl_get_publickey("file:///". dirname(__FILE__) . "/server.crt");
+
+$result = openssl_public_encrypt($message, $cipher_text, $pub_key); 
+
+echo "读取公钥文件方式加密demo" . PHP_EOL;
+var_dump($result);
+file_put_contents("3_encrypt.enc", $cipher_text); // 保存供 4_decrypt.php 解密用
+var_dump(bin2hex($cipher_text));
+
+
+

@@ -10,13 +10,16 @@ $dn = array(
     "emailAddress" => "huangwei.me@cuc.edu.cn"
 );
 
+$pk_config = array(
+    'private_key_bits' => 2048,
+    'private_key_type' => OPENSSL_KEYTYPE_RSA,
+    'digest_alg' => 'sha256',
+);
+
 // 产生公私钥对一套
 // 等价openssl命令
 // openssl genrsa -out server.key 2048
-$privkey = openssl_pkey_new(array(
-    'private_key_bits' => 2048,
-    'private_key_type' => OPENSSL_KEYTYPE_RSA)
-);
+$privkey = openssl_pkey_new($pk_config);
 
 // 查看生成的server.key的内容
 // openssl x509 -in server.key -text -noout
@@ -28,10 +31,12 @@ file_put_contents("server.key", $pkeyout);
 // 制作CSR文件：Certificate Signing Request
 // 等价openssl命令
 // openssl req -new -key server.key -out server.csr
-$csr = openssl_csr_new($dn, $privkey);
+// 查看CSR文件内容
+// openssl req -text -noout -in server.csr
+$csr = openssl_csr_new($dn, $privkey, $pk_config);
 
 // 对CSR文件进行自签名（第2个参数设置为null，否则可以设置为CA的证书路径），设置证书有效期：365天
-$sscert = openssl_csr_sign($csr, null, $privkey, 365);
+$sscert = openssl_csr_sign($csr, null, $privkey, 365, $pk_config);
 // 以上所有代码的等价单行openssl命令
 // openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -days 365
 
