@@ -9,24 +9,9 @@
 header("content-Type:text/html;charset=utf-8");
 var_dump($_POST);
 
-
-
     $username = $_POST['user'];
     $password = $_POST['pass'];
     $repassword = $_POST['repass'];
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 if ($password != $repassword) {
         echo "<script>alert('两次输入的密码不一致，请重新输入！');location='enroll.html';</script>";
@@ -68,7 +53,6 @@ if ($password != $repassword) {
 
                  check_name($username);
 
-
                 $reg1 = '/^[a-zA-Z]+$/u';
                 $reg2 ='/^[0-9]+$/u';
                 if (preg_match ( $reg1, $password )==1) {
@@ -77,7 +61,6 @@ if ($password != $repassword) {
                 if (preg_match ( $reg2, $password )==1) {
                     echo "<script>alert('口令不能为纯数字！');location='enroll.html';</script>";
                 }
-
 
                 $hash = password_hash("$password", PASSWORD_BCRYPT);
                 echo $hash;  echo "<br>"; echo $username;  echo "<br>";   echo $password;
@@ -111,26 +94,17 @@ if ($password != $repassword) {
 
                 //把用户名，密码的哈希，公私钥存储到数据库：
                 $insert = "INSERT INTO uesrs (usr_name,pasaword,pub_key,private_key)VALUES ('$username','$hash','$pubKey','$privKey')";
-
-
-
-
                 mysql_query($insert);
                 $num = mysql_affected_rows();
                 if ($num > 0)
                 {
-
-
-
-
-
                     echo "<script>alert('用户注册成功！');location='index.html';</script>";
-                } else
+                }
+                else
                 {
                     echo "<script>alert('用户注册失败！');location='enroll.html';</script>";
                 }
             }//用户可用
-
         }//链接数据库成功
     }//两次密码相同
 ?>
