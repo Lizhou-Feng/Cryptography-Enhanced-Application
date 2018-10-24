@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> AppliedCrypto Enhanced Web</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- -->
+    <script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');}
+    ;for (var i = 0, l = __links.length; i < l; i++) {
+        if ( __links[i].getAttribute('data-t') == '_blank' ) {
+            __links[i].addEventListener('click', __linkClick, false);}}</script>
+    <script src="js/jquery.min.js"></script>
+    <script>$(document).ready(function(c) {
+        $('.alert-close').on('click', function(c){
+            $('.message').fadeOut('slow', function(c){
+                $('.message').remove();
+            });
+        });
+    });
+    </script>
+</head>
+<body>
+
+<!-- contact-form -->
+<div class="message warning">
+    <div class="inset">
+        <div class="login-head">
+            <h1>Login Form</h1>
+            <div class="alert-close"> </div>
+        </div>
+        <form   action="logpage.php" method="post">
+            <li>
+                <input type="text" class="text"  name="usrname" value="Username" onfocus="this.value = '';
+                " onblur="if (this.value == '') {this.value = 'Username';}">
+            </li>
+            <div class="clear"> </div>
+            <li>
+                <input type="password"  name="pass" value="Password" onfocus="this.value = '';
+                " onblur="if (this.value == '') {this.value = 'Password';}">
+            </li>
+            <div class="clear"> </div>
+            <div class="submit">
+                <input type="submit" onclick="myFunction()" value="Log in" >
+                <h4><a href="enroll.html"> Enroll us</a></h4>
+                <h4><a href="files.html">Be a guest</a></h4>
+                <div class="clear">  </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>
+<div class="clear"> </div>
+
+
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>
+<!---
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1>log page</h1>
+
+<p>
+</p>
+
+<form id="form1" name="form1" method="POST" action="logpage.php">
+    username:<input type="text" name="usrname"><br />
+
+    password:<input type="password" name="pass"><br />
+
+
+    <input type="submit" name="submit" id="" value="log in" />
+    <a href="enroll.html" class="btn" type="button">Enroll</a>
+</form>
+<p>&nbsp;</p>
+</body>
+</html>
+
+ --->
